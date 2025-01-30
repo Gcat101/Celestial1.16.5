@@ -11,6 +11,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -116,10 +117,13 @@ public class VMinecraftInstance implements IMinecraftInstance {
     public float getViewYRot() {
         return minecraft.player.getViewYRot(getTickDelta());
     }
-    public float getCameraLookVectorTwilight(float h) {
+    public float getCameraLookVectorTwilight(float h, float rotate) {
         return minecraft.gameRenderer.getMainCamera().getLookVector().dot(new Vector3f(h, 0.0F, 0.0F));
     }
 
+    public CompoundTag getPlayerNBT() {
+        return minecraft.player.saveWithoutId(new CompoundTag());
+    }
     public BlockPos getPlayerBlockPosition() {
         return minecraft.player.blockPosition();
     }
